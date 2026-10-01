@@ -15,6 +15,7 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
+      "@/*": ["./apps/www/*"],
       "@geocn/geo": ["./packages/geo/src/index.ts"],
       "@geocn/geo/*": ["./packages/geo/src/*"],
       "@geocn/geo-data": ["./packages/geo-data/src/index.ts"],

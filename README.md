@@ -15,12 +15,13 @@ $$\text{Install} \longrightarrow \text{Inspect} \longrightarrow \text{Understand
 GeoCN is actively establishing its **production-grade engineering foundation**. Rather than populating the repository with dozens of incomplete or fake visualizations, GeoCN follows a **vertical-slice development model**: each geographic component is delivered only after its complete pipeline—from raw geographic acquisition and provenance validation to rendering, accessibility, documentation, and registry distribution—is fully verified.
 
 ### Current Implementation Scope
+
 - [x] Monorepo architecture & module boundaries (`@geocn/geo`, `@geocn/geo-data`, `@geocn/ui`, `@geocn/registry`, `@geocn/www`)
 - [x] Geographic manifest schema with strict provenance & transformation history
 - [x] Deterministic validation tooling (`npm run geo:validate`, `npm run registry:validate`)
 - [x] Strict TypeScript configuration, linting, and automated test runners
 - [x] Technical cartographic design tokens (light/dark/contrast/grid)
-- [ ] *Phase 2 (Upcoming)*: Visual language & geographic rendering engine primitives
+- [ ] _Phase 2 (Upcoming)_: Visual language & geographic rendering engine primitives
 
 ---
 
@@ -56,6 +57,7 @@ geocn/
 ## 🛠 Getting Started
 
 ### Prerequisites
+
 - **Node.js**: `v20+` (LTS recommended)
 - **Package Manager**: `npm` (`npm workspaces` standard)
 - **Git**
@@ -99,6 +101,7 @@ npm run build
 ## 📜 Architectural Decisions (ADRs)
 
 Key architectural decisions are documented under [`docs/decisions/`](docs/decisions/):
+
 - **ADR-0001**: Lightweight SVG & mathematical projections (`d3-geo`) over heavy proprietary tile runtimes for administrative UI.
 - **ADR-0002**: Shadcn registry model distribution over monolithic npm package bundling.
 - **ADR-0003**: Provenance-first geographic metadata specification.

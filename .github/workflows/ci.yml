@@ -1,0 +1,52 @@
+name: GeoCN Quality Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, Typecheck, Test & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify code formatting
+        run: npm run format:check
+
+      - name: Lint codebase
+        run: npm run lint
+
+      - name: Typecheck all workspaces
+        run: npm run typecheck
+
+      - name: Run unit & invariant test suites
+        run: npm run test
+
+      - name: Validate geographic datasets & manifests
+        run: npm run geo:validate
+
+      - name: Build shadcn registry distribution
+        run: npm run registry:build
+
+      - name: Validate compiled registry invariants
+        run: npm run registry:validate
+
+      - name: Build Next.js documentation portal
+        run: npm run build --workspace=@geocn/www

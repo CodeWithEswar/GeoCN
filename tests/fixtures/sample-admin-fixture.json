@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "name": "sample-admin-fixture",
+  "description": "Explicit architectural test fixture for GeoCN validation pipeline. NOT production geometry.",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "FIXTURE-NORTH",
+      "properties": {
+        "id": "FIXTURE-NORTH",
+        "name": "Northern Test Region",
+        "code": "NR",
+        "adminLevel": 1,
+        "isTestFixture": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [10.0, 50.0],
+            [15.0, 50.0],
+            [15.0, 55.0],
+            [10.0, 55.0],
+            [10.0, 50.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FIXTURE-SOUTH",
+      "properties": {
+        "id": "FIXTURE-SOUTH",
+        "name": "Southern Test Region",
+        "code": "SR",
+        "adminLevel": 1,
+        "isTestFixture": true
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [10.0, 45.0],
+            [15.0, 45.0],
+            [15.0, 50.0],
+            [10.0, 50.0],
+            [10.0, 45.0]
+          ]
+        ]
+      }
+    }
+  ]
+}

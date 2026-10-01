@@ -1,0 +1,42 @@
+[
+  {
+    "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+    "name": "geo-utils",
+    "type": "registry:lib",
+    "title": "GeoCN Core Utilities",
+    "description": "Mathematical projections, coordinate bounds calculations, and container fitting helpers for geographic UI.",
+    "dependencies": [
+      "d3-geo"
+    ],
+    "devDependencies": [
+      "@types/d3-geo",
+      "@types/geojson"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "packages/geo/src/types/index.ts",
+        "type": "registry:lib",
+        "target": "lib/geo-types.ts"
+      },
+      {
+        "path": "packages/geo/src/geometry/index.ts",
+        "type": "registry:lib",
+        "target": "lib/geo-geometry.ts"
+      },
+      {
+        "path": "packages/geo/src/projections/index.ts",
+        "type": "registry:lib",
+        "target": "lib/geo-projections.ts"
+      }
+    ],
+    "categories": [
+      "utilities",
+      "geography"
+    ],
+    "meta": {
+      "framework": "react",
+      "strictTypeScript": true
+    }
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "id": "sample-admin-fixture",
+  "name": "Sample Administrative Regions (Test Fixture)",
+  "country": "Testland",
+  "iso2": "TL",
+  "iso3": "TLS",
+  "adminLevel": 1,
+  "source": {
+    "name": "GeoCN Architectural Validation Synthetic Fixture",
+    "url": "https://github.com/CodeWithEswar/GeoCN",
+    "provider": "GeoCN Core Maintenance Team"
+  },
+  "license": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT",
+    "attribution": "Copyright (c) 2026 GeoCN Project",
+    "redistributionAllowed": true
+  },
+  "acquiredAt": "2026-10-01T00:00:00Z",
+  "version": "1.0.0",
+  "format": "geojson",
+  "crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+  "featureCount": 2,
+  "bbox": [10.0, 45.0, 15.0, 55.0],
+  "relativePath": "../../../tests/fixtures/sample-admin-fixture.json",
+  "transformations": [
+    {
+      "type": "synthetic-generation",
+      "appliedAt": "2026-10-01T00:00:00Z",
+      "summary": "Synthesized 2 adjacent rectangular polygons for deterministic pipeline testing",
+      "parameters": {
+        "projection": "EPSG:4326",
+        "precision": 4
+      }
+    }
+  ]
+}

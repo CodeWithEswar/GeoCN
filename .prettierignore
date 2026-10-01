@@ -4,4 +4,7 @@ dist/
 coverage/
 package-lock.json
 *.tsbuildinfo
-registry/generated/
+next-env.d.ts
+apps/www/next-env.d.ts
+registry/
+apps/www/public/r/
