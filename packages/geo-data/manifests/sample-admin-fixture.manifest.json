@@ -6,15 +6,24 @@
   "iso3": "TLS",
   "adminLevel": 1,
   "source": {
-    "name": "GeoCN Architectural Validation Synthetic Fixture",
-    "url": "https://github.com/CodeWithEswar/GeoCN",
-    "provider": "GeoCN Core Maintenance Team"
+    "name": "GeoCN Synthetic Architectural Test Fixture",
+    "provider": "GeoCN Core Maintenance Team",
+    "datasetTitle": "2-Region Rectangular Synthetic Geometry",
+    "reference": {
+      "homepageUrl": "https://github.com/CodeWithEswar/GeoCN",
+      "datasetUrl": "https://github.com/CodeWithEswar/GeoCN/tree/main/tests/fixtures",
+      "documentationUrl": "https://github.com/CodeWithEswar/GeoCN/blob/main/docs/geography/pipeline.md",
+      "licenseUrl": "https://opensource.org/licenses/MIT"
+    }
   },
   "license": {
     "name": "MIT",
+    "spdxId": "MIT",
     "url": "https://opensource.org/licenses/MIT",
     "attribution": "Copyright (c) 2026 GeoCN Project",
-    "redistributionAllowed": true
+    "redistributionAllowed": true,
+    "commercialUseAllowed": true,
+    "modificationsAllowed": true
   },
   "acquiredAt": "2026-10-01T00:00:00Z",
   "version": "1.0.0",
@@ -23,8 +32,12 @@
   "featureCount": 2,
   "bbox": [10.0, 45.0, 15.0, 55.0],
   "relativePath": "../../../tests/fixtures/sample-admin-fixture.json",
+  "rawChecksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "generatedChecksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fileSizeBytes": 1024,
   "transformations": [
     {
+      "step": 1,
       "type": "synthetic-generation",
       "appliedAt": "2026-10-01T00:00:00Z",
       "summary": "Synthesized 2 adjacent rectangular polygons for deterministic pipeline testing",

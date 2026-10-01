@@ -7,3 +7,4 @@ export * from "./utilities/cn";
 export * from "./tokens";
 export * from "./primitives/status-beacon";
 export * from "./primitives/geo-badge";
+export * from "./hooks/use-geo-container";

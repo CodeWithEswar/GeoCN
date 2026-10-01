@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import path from "node:path";
-import { validateDatasetManifest } from "@geocn/geo-data";
+import { validateDatasetManifest, GeoSourceReferenceSchema } from "@geocn/geo-data";
 import { validateFeatureCollection } from "@geocn/geo";
 
 describe("Geographic Pipeline & Dataset Validation", () => {
@@ -16,6 +16,38 @@ describe("Geographic Pipeline & Dataset Validation", () => {
     expect(report.datasetId).toBe("sample-admin-fixture");
     expect(report.featureCount).toBe(2);
     expect(report.errors).toHaveLength(0);
+  });
+
+  it("should validate the real US States & DC production dataset manifest", () => {
+    const manifestPath = path.resolve(
+      __dirname,
+      "../../packages/geo-data/manifests/us-states-admin-1.manifest.json"
+    );
+
+    const report = validateDatasetManifest(manifestPath);
+
+    expect(report.valid).toBe(true);
+    expect(report.datasetId).toBe("us-states-admin-1");
+    expect(report.featureCount).toBe(51);
+    expect(report.errors).toHaveLength(0);
+  });
+
+  it("should validate source reference URLs using GeoSourceReferenceSchema", () => {
+    const validRef = {
+      datasetUrl: "https://www.census.gov/geographies/mapping-files.html",
+      homepageUrl: "https://www.census.gov",
+      documentationUrl: "https://www.census.gov/docs.html",
+      licenseUrl: "https://www.usa.gov/government-works",
+    };
+
+    const parsed = GeoSourceReferenceSchema.safeParse(validRef);
+    expect(parsed.success).toBe(true);
+
+    const invalidRef = {
+      datasetUrl: "not-a-valid-url",
+    };
+    const failedParse = GeoSourceReferenceSchema.safeParse(invalidRef);
+    expect(failedParse.success).toBe(false);
   });
 
   it("should reject GeoJSON with duplicate feature IDs", () => {

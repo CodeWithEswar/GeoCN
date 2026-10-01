@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-beacon",
+  "type": "registry:ui",
+  "title": "Status Beacon",
+  "description": "Technical status beacon indicator for datasets, quality gates, and registry items.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "devDependencies": [
+    "@types/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/primitives/status-beacon.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/status-beacon.tsx",
+      "content": "/**\n * @file packages/ui/src/primitives/status-beacon.tsx\n * @description Technical status beacon indicator for datasets, quality gates, and registry items.\n */\n\nimport React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"../utilities/cn\";\n\nconst beaconVariants = cva(\n  \"inline-flex items-center gap-1.5 font-mono text-xs tracking-tight\",\n  {\n    variants: {\n      status: {\n        success: \"text-emerald-600 dark:text-emerald-400\",\n        warning: \"text-amber-600 dark:text-amber-400\",\n        error: \"text-rose-600 dark:text-rose-400\",\n        neutral: \"text-zinc-600 dark:text-zinc-400\",\n        info: \"text-sky-600 dark:text-sky-400\",\n      },\n    },\n    defaultVariants: {\n      status: \"neutral\",\n    },\n  }\n);\n\nconst dotVariants = cva(\"size-2 rounded-full\", {\n  variants: {\n    status: {\n      success: \"bg-emerald-500\",\n      warning: \"bg-amber-500\",\n      error: \"bg-rose-500\",\n      neutral: \"bg-zinc-400\",\n      info: \"bg-sky-500\",\n    },\n  },\n  defaultVariants: {\n    status: \"neutral\",\n  },\n});\n\nexport interface StatusBeaconProps\n  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof beaconVariants> {\n  children?: React.ReactNode;\n}\n\nexport function StatusBeacon({\n  className,\n  status,\n  children,\n  ...props\n}: StatusBeaconProps) {\n  return (\n    <span className={cn(beaconVariants({ status }), className)} {...props}>\n      <span className={cn(dotVariants({ status }))} aria-hidden=\"true\" />\n      {children ? <span>{children}</span> : null}\n    </span>\n  );\n}\n"
+    }
+  ],
+  "categories": [
+    "ui",
+    "indicators"
+  ],
+  "meta": {
+    "framework": "react",
+    "strictTypeScript": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-geo-container",
+  "type": "registry:hook",
+  "title": "Use Geo Container Hook",
+  "description": "Hydration-safe ResizeObserver hook computing responsive SVG viewport bounds and aspect ratios.",
+  "dependencies": [],
+  "devDependencies": [
+    "@types/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/hooks/use-geo-container.ts",
+      "type": "registry:hook",
+      "target": "hooks/use-geo-container.ts",
+      "content": "/**\n * @file packages/ui/src/hooks/use-geo-container.ts\n * @description Hydration-safe ResizeObserver hook computing responsive SVG viewport bounds and aspect ratios.\n */\n\nimport * as React from \"react\";\n\nexport interface GeoContainerDimensions {\n  readonly width: number;\n  readonly height: number;\n  readonly aspect: number;\n  readonly ready: boolean;\n}\n\nexport interface UseGeoContainerOptions {\n  /** Fallback width before mount or when container is 0-width (default: 800) */\n  readonly defaultWidth?: number;\n  /** Fallback height before mount or when container is 0-height (default: 500) */\n  readonly defaultHeight?: number;\n  /** Target fixed aspect ratio (width / height). If specified, height is derived from measured width. */\n  readonly aspectRatio?: number;\n}\n\nexport function useGeoContainer<T extends HTMLElement | SVGElement = HTMLDivElement>(\n  targetRef: React.RefObject<T | null>,\n  options: UseGeoContainerOptions = {}\n): GeoContainerDimensions {\n  const { defaultWidth = 800, defaultHeight = 500, aspectRatio } = options;\n\n  const [dimensions, setDimensions] = React.useState<GeoContainerDimensions>({\n    width: defaultWidth,\n    height: aspectRatio ? defaultWidth / aspectRatio : defaultHeight,\n    aspect: aspectRatio ?? defaultWidth / defaultHeight,\n    ready: false,\n  });\n\n  React.useEffect(() => {\n    const element = targetRef.current;\n    if (!element) return;\n\n    let frameId: number | null = null;\n\n    const updateDimensions = (measuredWidth: number, measuredHeight: number) => {\n      // Prevent 0-dimension updates on hidden tabs or unmounted frames\n      const safeWidth = measuredWidth > 0 ? measuredWidth : defaultWidth;\n      const safeHeight = aspectRatio\n        ? safeWidth / aspectRatio\n        : measuredHeight > 0\n          ? measuredHeight\n          : defaultHeight;\n\n      setDimensions({\n        width: Math.round(safeWidth),\n        height: Math.round(safeHeight),\n        aspect: safeWidth / safeHeight,\n        ready: true,\n      });\n    };\n\n    // Initial measurement\n    const rect = element.getBoundingClientRect();\n    updateDimensions(rect.width, rect.height);\n\n    if (typeof ResizeObserver === \"undefined\") {\n      return;\n    }\n\n    const observer = new ResizeObserver((entries) => {\n      const entry = entries[0];\n      if (!entry) return;\n\n      if (frameId !== null) {\n        cancelAnimationFrame(frameId);\n      }\n\n      frameId = requestAnimationFrame(() => {\n        let width = 0;\n        let height = 0;\n\n        if (entry.contentBoxSize && entry.contentBoxSize[0]) {\n          width = entry.contentBoxSize[0].inlineSize;\n          height = entry.contentBoxSize[0].blockSize;\n        } else {\n          width = entry.contentRect.width;\n          height = entry.contentRect.height;\n        }\n\n        updateDimensions(width, height);\n      });\n    });\n\n    observer.observe(element);\n\n    return () => {\n      observer.disconnect();\n      if (frameId !== null) {\n        cancelAnimationFrame(frameId);\n      }\n    };\n  }, [targetRef, defaultWidth, defaultHeight, aspectRatio]);\n\n  return dimensions;\n}\n"
+    }
+  ],
+  "categories": [
+    "hooks",
+    "geography",
+    "responsive"
+  ],
+  "meta": {
+    "framework": "react",
+    "strictTypeScript": true
+  }
+}

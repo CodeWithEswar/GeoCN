@@ -32,6 +32,9 @@ export const GeoDatasetManifestSchema = z.object({
   featureCount: z.number().int().positive("Dataset must contain at least 1 feature"),
   bbox: GeoBoundingBoxSchema,
   relativePath: z.string().min(1, "Relative path to geographic artifact is required"),
+  rawChecksum: z.string().optional(),
+  generatedChecksum: z.string().optional(),
+  fileSizeBytes: z.number().int().positive().optional(),
   transformations: z.array(GeoTransformationSchema).default([]),
 });
 
