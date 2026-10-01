@@ -1,0 +1,37 @@
+{
+  "name": "geocn-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GeoCN - Open-source geographic UI registry and cartographic component ecosystem",
+  "author": "GeoCN Contributors",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@geocn/www",
+    "build": "npm run build:packages && npm run registry:build && npm run build --workspace=@geocn/www",
+    "build:packages": "npm run build --workspace=@geocn/geo && npm run build --workspace=@geocn/ui",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck:root && npm run typecheck --workspaces --if-present",
+    "typecheck:root": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:registry": "vitest run tests/registry",
+    "test:geo": "vitest run tests/geography",
+    "geo:validate": "tsx scripts/geo/validate-datasets.ts",
+    "registry:build": "tsx scripts/registry/build-registry.ts",
+    "registry:validate": "tsx scripts/registry/validate-registry.ts",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "eslint": "^9.21.0",
+    "prettier": "^3.5.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}

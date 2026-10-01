@@ -1,0 +1,24 @@
+{
+  "name": "@geocn/geo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GeoCN core geographic projection, geometry, and validation primitives",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "d3-geo": "^3.1.0",
+    "topojson-client": "^3.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.16",
+    "@types/topojson-client": "^3.1.5",
+    "typescript": "^5.7.3"
+  }
+}

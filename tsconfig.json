@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@geocn/geo": ["./packages/geo/src/index.ts"],
+      "@geocn/geo/*": ["./packages/geo/src/*"],
+      "@geocn/geo-data": ["./packages/geo-data/src/index.ts"],
+      "@geocn/geo-data/*": ["./packages/geo-data/src/*"],
+      "@geocn/ui": ["./packages/ui/src/index.ts"],
+      "@geocn/ui/*": ["./packages/ui/src/*"],
+      "@geocn/registry": ["./packages/registry/src/index.ts"],
+      "@geocn/registry/*": ["./packages/registry/src/*"]
+    }
+  },
+  "include": [
+    "packages/*/src",
+    "scripts",
+    "tests",
+    "apps/www/**/*.ts",
+    "apps/www/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "**/dist", "**/.next"]
+}
